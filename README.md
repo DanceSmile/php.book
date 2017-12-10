@@ -1,6 +1,186 @@
 ## 对象基础
 
+## 反射
 
+PHP反射可以分析属性，函数和对象，它是由一系列内置的类组成
+
+### 获取类的信息
+
+使用反射类可以获取一个类的更多细节
+
+```PHP
+//定义一个简单的类
+class Animal {
+
+    private  $name;
+    public  $age;
+
+     /**
+     * @return 获取$name
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+    public function run()
+    {
+
+        echo $this->name . "is running";
+
+    }
+}
+
+//实例化一个反射类，反射类的构造函数接受一个类名作为它的唯一参数
+$reflection =  new ReflectionClass("Animal");
+
+//使用Reflection工具类的静态方法可以格式化输出反射对象的管理数据
+//相比于var_dump 或者 var_export ，使用Reflection可以打印出更多的class细节，并且不需要实例化
+Reflection::export($reflection);
+
+```
+
+### 分析类
+
+
+>  使用 ReflectionClass 分析类
+
+
+```PHP
+//实例化一个反射类，反射类的构造函数接受一个类名作为它的唯一参数
+$reflection =  new ReflectionClass("Animal");
+
+//使用Reflection工具类的静态方法可以格式化输出反射对象的管理数据
+Reflection::export($reflection);
+
+// 分析类
+
+//返回检查的类名
+$class_name = $reflection->getName();
+var_dump($class_name);
+
+//检测类是否是用户定义
+$is_user_define = $reflection->isUserDefined();
+var_dump($is_user_define);
+
+检测类是否是内置的类
+$is_built_in = $reflection->isInternal();
+var_dump($is_built_in);
+
+//检测类是否是否是抽象类
+$is_abstract = $reflection->isAbstract();
+var_dump($is_abstract);
+
+//检测类是否是接口类
+$is_interfalce =$reflection->isInterface();
+var_dump($is_interfalce);
+
+//检测类是否是最终类
+$is_final = $reflection->isFinal();
+var_dump($is_final);
+
+//检测类是否可以实例化
+$is_able_instance = $reflection->isInstantiable();
+var_dump($is_able_instance);
+
+```
+
+### 分析方法
+
+>  使用 ReflectionMethod 分析方法
+
+
+```PHP
+//获取分析类的所有方法，返回一个 ReflectionMethod类型的数组
+$fun_arr = $reflection->getMethods();
+var_dump($fun_arr);
+
+//获取方法名
+$fun_name = $fun_run->getName();
+var_dump($fun_name);
+
+//获取特定的方法，返回一个 ReflectionMethod类型
+$fun_run = $reflection->getMethod("run");
+var_dump($fun_run);
+
+//检测是否是用户定义
+$is_user_define = $fun_run->isUserDefined();
+var_dump($is_user_define);
+
+//检测是否是内置方法
+$is_built_in = $fun_run->isInternal();
+var_dump($is_built_in);
+
+//检测是否是抽象方法
+$is_abstract  = $fun_run->isAbstract();
+var_dump($is_abstract);
+
+//检测是否是公开
+$is_public = $fun_run->isPublic();
+var_dump($is_public);
+
+//检测是否是私有方法
+$is_private = $fun_run->isPrivate();
+var_dump($is_private);
+
+//检测是否是受保护的方法
+$is_protected = $fun_run->isProtected();
+var_dump($is_protected);
+
+//是否是最终方法
+$is_final = $fun_run->isFinal();
+var_dump($is_final);
+
+//是否是构造方法
+$is_constract = $fun_run->isConstructor();
+var_dump($is_constract);
+
+//检测是否是引用方法
+$is_reference = $fun_run->returnsReference();
+var_dump($is_reference);
+
+```
+
+### 分析方法参数
+
+>  使用 ReflectionParameter 检测方法参数
+
+```PHP
+
+//获取方法的所有参数对象
+$params = $fun_run->getParameters();
+var_dump($params);
+
+// 获取第一个参数对象
+$distance = $params[0];
+var_dump($distance);
+
+//获取参数名
+$param_name = $distance->getName();
+var_dump($param_name);
+
+//获取参数的类型限制
+$class = $distance->getClass();
+var_dump($class);
+
+
+//获取参数位置
+$position = $distance->getPosition();
+var_dump($position);
+
+
+//参数的默认值
+$default_value = $distance->getDefaultValue();
+var_dump($default_value);
+
+
+//是否是引用参数
+$is_reference = $distance->isPassedByReference();
+var_dump($is_reference);
+
+```
+### 使用反射
+
+pass
 
 
 ## 设计模式
