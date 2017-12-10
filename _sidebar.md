@@ -1,0 +1,5 @@
+- [设计模式](design.md)
+  - [工厂模式](quickstart.md)
+  - [Writing more pages](more-pages.md)
+  - [Custom navbar](custom-navbar.md)
+  - [Cover page](cover.md)
