@@ -1,3 +1,16 @@
+## php  密码hash
+
+```PHP
+$password = "phpHashBcryptWithconst";
+$hash_password = password_hash($password,PASSWORD_DEFAULT,["cost"=>12]);
+
+echo $hash_password;
+
+$verify = password_verify($password,$hash_password);
+
+var_dump($verify);
+```
+
 ## 对象基础
 
 ## 反射
@@ -216,7 +229,7 @@ $greeting->invoke($person);
 
 [link](/demo/ ":ignore")
 
-### 单利模式
+### 单例模式
 
 ```PHP
 /**
