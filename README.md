@@ -219,8 +219,6 @@ $greeting->invoke($person);
 ### 单利模式
 
 ```PHP
-
-
 /**
  * 构造一个配置类
  */
