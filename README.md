@@ -180,9 +180,28 @@ var_dump($is_reference);
 ```
 ### 使用反射
 
-pass
+使用反射实例化类,并且执行实例里的方法
 
+```PHP
+class Person{
 
+    function greeting()
+    {
+        echo "hello !\n";
+    }
+}
+
+// 获得一个反射类
+$reflection = new  ReflectionClass("Person");
+
+// 实例一个person类
+$person = $reflection->newInstance(); //newInstanceArgs可以实例传入够赞函数的参数
+
+// 执行方法
+$greeting = $reflection->getMethod("greeting");
+$greeting->invoke($person);
+
+```
 ## 设计模式
 
 
