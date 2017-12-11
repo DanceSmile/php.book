@@ -195,7 +195,7 @@ class Person{
 $reflection = new  ReflectionClass("Person");
 
 // 实例一个person类
-$person = $reflection->newInstance(); //newInstanceArgs可以实例传入够赞函数的参数
+$person = $reflection->newInstance(); //newInstanceArgs可以实例传入 构造函数的参数
 
 // 执行方法
 $greeting = $reflection->getMethod("greeting");
@@ -215,3 +215,65 @@ $greeting->invoke($person);
 [link](/demo/)
 
 [link](/demo/ ":ignore")
+
+### 单利模式
+
+```PHP
+
+
+/**
+ * 构造一个配置类
+ */
+class Config {
+
+    // 项目的配置项属性
+    private $props = array();
+
+    // 类的实例
+    private static  $instance =  null ;
+
+    // 将构造函数设置成私有，防止外部实例化
+    private  function  __construct(){ }
+
+    // 内部实例化对象，单例防止多次实例化
+    public  static function getInstance()
+    {
+        if( !self::$instance ){
+            self::$instance = new Config();
+        }
+        return self::$instance;
+    }
+
+    // 设置属性
+    public  function  setProperty( $key, $value )
+    {
+        $this->props[$key] = $value;
+
+    }
+    // 返回属性
+    public  function getProperty( $key )
+    {
+        return $this->props[$key] . "\n";
+    }
+
+
+}
+
+// 实例化配置1⃣，设置配置值
+$prop1 = Config::getInstance();
+$prop1->setProperty("name","test");
+
+// 实例化配置2，配置项目值
+$prop2 = Config::getInstance();
+$prop2->setProperty("age","12");
+
+// 共享配置
+echo $prop1->getProperty("name");
+echo $prop2->getProperty("name");
+
+echo $prop1->getProperty("age");
+echo $prop2->getProperty("age");
+
+```
+
+> 静态方法不可以访问对象属性，但是可以访问一个静态属性
