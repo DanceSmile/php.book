@@ -461,3 +461,24 @@ $builder->build();
 $product = $builder->getProduct();
 var_dump($product);
 ```
+### 数据库访问模式
+
+```PHP
+/**
+* 数据访问对象模式
+*/
+abstract class Model
+{
+	protected $_connection = NULL;
+	public function __construct(argument)
+	{
+
+	}
+
+	private function _connectDb( $user, $password, $host, $port , $database )
+	{
+		
+	}
+}
+
+```
