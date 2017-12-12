@@ -52,7 +52,44 @@ $zero = new  Person();
 
 $zero->greeting();
 
-var_dump($zero);
+//实例访问
+var_dump($zero::$eye_count);
+
+```
+### 常量
+
+```PHP
+
+/**
+ *  常量属性
+ *  常量属性是不可变的，一旦定义就没有办法修改
+ *  按照管理常量使用const关键字定义，使用大写名，不需要使用美元符号
+ *
+ *
+ * 使用途径
+ * 当我们在类中所有的实例都需要访问，并且不可改变的时候就使用常量
+ */
+class Product
+{
+    const PRICE = 100;
+    const  COLOR = "red";
+
+    public function get_color()
+    {
+        echo self::COLOR."\n";
+    }
+}
+
+//类访问
+var_dump(Product::COLOR);
+//类访问
+var_dump(Product::PRICE);
+
+$product = new Product();
+// 普通方法访问
+$product->get_color();
+//对象访问
+var_dump($product::PRICE);
 
 ```
 
