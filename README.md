@@ -1,7 +1,7 @@
 ## php  密码hash
 
 ```PHP
-$password = "phpHashBcryptWithconst";
+$password = 'phpHashBcryptWithconst';
 $hash_password = password_hash($password,PASSWORD_DEFAULT,["cost"=>12]);
 
 echo $hash_password;
@@ -12,6 +12,49 @@ var_dump($verify);
 ```
 
 ## 对象基础
+
+### 类变量和类方法 || 静态变量和静态方法
+
+```PHP
+/**
+ * 静态方法和属性
+ * 静态变量和方法的好处在于不需要实例化就可以访问静态属性和方法，
+ */
+class Person
+{
+    public  static  $eye_count = 2;
+    public  static  $hand_count;
+
+    public  $name="zero";
+    //普通方法
+    public function greeting()
+    {
+        echo self::$eye_count;
+        echo "hello !!\n";
+    }
+    //静态方法
+    public static function go(){
+        echo "go home !! \n";
+        echo "we are have " . self::$eye_count ."eyes " . "\n";
+    }
+}
+
+
+//可以通过类来访问属性和方法，称之为静态方法或者类方法
+//静态方法不能访问普通属性，因为普通属性是绑定在对象上，但是可以访问静态属性
+$eye_count = Person::$eye_count;
+var_dump($eye_count);
+
+Person::go();
+
+//在普通方法中可以调用到静态属性
+$zero = new  Person();
+
+$zero->greeting();
+
+var_dump($zero);
+
+```
 
 ## 反射
 
@@ -298,7 +341,7 @@ echo $prop2->getProperty("age");
  */
 /**
 * error class
-*/	
+*/
 class  ErrorObject
 {
 	private $_error;
@@ -318,25 +361,25 @@ class  ErrorObject
 */
 class LogToConsole
 {
-	
+
 	private $_errorObj;
 	function __construct(ErrorObject $error)
-	{	
+	{
 		$this->_errorObj  = $error;
 	}
 
 	public function write()
 	{
-		echo $this->_errorObj->getError()."\n";	
+		echo $this->_errorObj->getError()."\n";
 
 		return $this->_errorObj->getError();
 	}
 }
 
 /**
-* 
+*
 */
-class LogToExcel 
+class LogToExcel
 {
 	private $_errorObj;
 
@@ -357,12 +400,12 @@ class LogToExcel
 }
 
 /**
-* 
+*
 */
 class LogToExcelAdapter extends ErrorObject
 {
 	private $_errorCode;
-	private $_errorMessage;	
+	private $_errorMessage;
 	function __construct($error)
 	{
 		parent::__construct($error);
@@ -402,7 +445,7 @@ $log_to_excel->write();
 /**
 * 建造者模式
 */
-class Product 
+class Product
 {
 
 	protected  $_name = "";
@@ -421,8 +464,8 @@ class Product
 	{
 		$this->_color = $color;
 	}
-	
-	
+
+
 }
 
 
@@ -434,7 +477,7 @@ class ProductBuilder
 
 	private $_product = NUll;
 	private  $_configs = array();
-	
+
 	public 	function __construct($configs)
 	{
 		$this->_product = new Product();
@@ -477,7 +520,7 @@ abstract class Model
 
 	private function _connectDb( $user, $password, $host, $port , $database )
 	{
-		
+
 	}
 }
 

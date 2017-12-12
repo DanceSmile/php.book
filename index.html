@@ -11,46 +11,11 @@
 <body>
   <div id="app"></div>
   <script>
-
-  window.$docsify = {
-    search: 'auto', // 默认值
-    name: 'php 开发者',
-    // loadSidebar: true,
-    subMaxLevel: 2,
-    repo: '',
-    search : [
-      '/',            // => /README.md
-      // 'design'
-    ],
-    // 完整配置参数
-    search: {
-      maxAge: 86400000, // 过期时间，单位毫秒，默认一天
-      paths: [], // or 'auto'
-      placeholder: 'Type to search',
-
-      // 支持本地化
-      placeholder: {
-        '/': '搜索'
-      },
-
-      noData: '没有结果',
-
-      // 支持本地化
-      noData: {
-        '/': '找不到结果'
-      },
-
-      // 搜索标题的最大程级, 1 - 6
-      depth: 2
+    window.$docsify = {
+      name: '',
+      repo: ''
     }
-  }
-
   </script>
-  <script src="//unpkg.com/prismjs/components/prism-bash.js"></script>
-  <script src="//unpkg.com/prismjs/components/prism-php.js"></script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
-  <script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
-
-
 </body>
 </html>
