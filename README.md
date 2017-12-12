@@ -112,7 +112,7 @@ class Application extends Logger
 {
     public  function write()
     {
-
+      // pass
     }
 }
 
@@ -121,6 +121,46 @@ $application =  new Application();
 
 var_dump($application);
 
+```
+
+### 接口类
+
+```PHP
+
+/**
+ * Interface Chargeable
+ * 定义接口类，接口类定义具体的实现标准
+ * 接口类可以包含属性和方法，方法体必须是空
+ * 任何实现接口的类都要实现接口类的所有方法，除非是抽象类
+ * 实现接口的类接受了它继承的类和实现的接口的类型
+ * 可以实现（继承）多个接口类
+ */
+interface  Chargeable
+{
+    public function getPrice();
+}
+
+abstract class Product{
+
+}
+
+
+class MilkProduct extends Product implements Chargeable
+{
+    public  function  getPrice()
+    {
+        // TODO: Implement getPrice() method.
+
+    }
+}
+
+
+$milk = new MilkProduct();
+
+//判断实例类型
+var_dump( $milk instanceof MilkProduct );
+var_dump( $milk instanceof Product );
+var_dump( $milk instanceof Chargeable );
 ```
 
 ## 反射
