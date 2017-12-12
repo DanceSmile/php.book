@@ -429,7 +429,7 @@ class Product
 /**
 *  product 建造类
 */
-class ProducrBuilder
+class ProductBuilder
 {
 
 	private $_product = NUll;
