@@ -395,3 +395,69 @@ $log_to_excel = new LogToExcel($error_adapter);
 $log_to_excel->write();
 
 ```
+
+### 建造者模式
+
+```PHP
+/**
+* 建造者模式
+*/
+class Product 
+{
+
+	protected  $_name = "";
+	protected  $_size = "";
+	protected  $_color = "";
+
+	public function setSize($size)
+	{
+		$this->_size = $size;
+	}
+	public function setName($name)
+	{
+		$this->_color = $name;
+	}
+	public function setColor($color)
+	{
+		$this->_color = $color;
+	}
+	
+	
+}
+
+
+/**
+*  product 建造类
+*/
+class ProducrBuilder
+{
+
+	private $_product = NUll;
+	private  $_configs = array();
+	
+	public 	function __construct($configs)
+	{
+		$this->_product = new Product();
+		$this->_configs = $configs;
+	}
+
+	public function build()
+	{
+		$this->_product->setName($this->_configs["name"]);
+		$this->_product->setSize($this->_configs["size"]);
+		$this->_product->setColor($this->_configs["color"]);
+	}
+
+
+	public function getProduct()
+	{
+		return $this->_product;
+	}
+}
+
+$configs = array("name" => "build" , "size" => 90 , "color" => "red" );
+$builder = new ProducrBuilder( $configs );
+$builder->build();
+$product = $builder->getProduct();
+var_dump($product);
+```
