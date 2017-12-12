@@ -26,13 +26,13 @@ class Person
     public  static  $hand_count;
 
     public  $name="zero";
-    //普通方法
+    // 普通方法
     public function greeting()
     {
         echo self::$eye_count;
         echo "hello !!\n";
     }
-    //静态方法
+    // 静态方法
     public static function go(){
         echo "go home !! \n";
         echo "we are have " . self::$eye_count ."eyes " . "\n";
@@ -40,19 +40,19 @@ class Person
 }
 
 
-//可以通过类来访问属性和方法，称之为静态方法或者类方法
-//静态方法不能访问普通属性，因为普通属性是绑定在对象上，但是可以访问静态属性
+// 可以通过类来访问属性和方法，称之为静态方法或者类方法
+// 静态方法不能访问普通属性，因为普通属性是绑定在对象上，但是可以访问静态属性
 $eye_count = Person::$eye_count;
 var_dump($eye_count);
 
 Person::go();
 
-//在普通方法中可以调用到静态属性
+// 在普通方法中可以调用到静态属性
 $zero = new  Person();
 
 $zero->greeting();
 
-//实例访问
+// 实例访问
 var_dump($zero::$eye_count);
 
 ```
@@ -80,16 +80,46 @@ class Product
     }
 }
 
-//类访问
+// 类访问
 var_dump(Product::COLOR);
-//类访问
+// 类访问
 var_dump(Product::PRICE);
 
 $product = new Product();
 // 普通方法访问
 $product->get_color();
-//对象访问
+// 实例访问
 var_dump($product::PRICE);
+
+```
+### 抽象类
+
+```PHP
+
+/**
+ * 抽象类使用abstract关键词定义
+ * 抽象类不能够被实例化，可以被继承
+ * 抽象类中定义了子类需要的方法
+ *
+ */
+abstract  class Logger
+{
+    // 抽象方法，继承的子类必须实现找个方法
+    abstract  public function write();
+}
+
+class Application extends Logger
+{
+    public  function write()
+    {
+
+    }
+}
+
+
+$application =  new Application();
+
+var_dump($application);
 
 ```
 
