@@ -288,3 +288,110 @@ echo $prop2->getProperty("age");
 ```
 
 > 静态方法不可以访问对象属性，但是可以访问一个静态属性
+
+### 适配器模式
+
+```PHP
+/**
+ * 适配器模式
+ * 适配器模式就是将某个对象(ErrorObject)的接口适配成另一个对象所期望的接口(LogToExcelAdapter)
+ */
+/**
+* error class
+*/	
+class  ErrorObject
+{
+	private $_error;
+	public function __construct($error)
+	{
+		$this->_error = $error;
+	}
+
+	public function getError()
+	{
+		return $this->_error;
+	}
+}
+
+/**
+* log console
+*/
+class LogToConsole
+{
+	
+	private $_errorObj;
+	function __construct(ErrorObject $error)
+	{	
+		$this->_errorObj  = $error;
+	}
+
+	public function write()
+	{
+		echo $this->_errorObj->getError()."\n";	
+
+		return $this->_errorObj->getError();
+	}
+}
+
+/**
+* 
+*/
+class LogToExcel 
+{
+	private $_errorObj;
+
+	public function __construct(ErrorObject $error)
+	{
+		$this->_errorObj = $error;
+	}
+
+	public function write()
+	{
+		$line = $this->_errorObj->getCode();
+		$line .=  "====";
+		$line .= $this->_errorObj->getMessage() ."\n";
+		echo $line;
+		return $line;
+	}
+
+}
+
+/**
+* 
+*/
+class LogToExcelAdapter extends ErrorObject
+{
+	private $_errorCode;
+	private $_errorMessage;	
+	function __construct($error)
+	{
+		parent::__construct($error);
+		$parts = explode(":", $this->getError());
+		$this->_errorCode = $parts[0];
+		$this->_errorMessage = $parts[1];
+	}
+	public function getCode()
+	{
+		return $this->_errorCode;
+	}
+	public function getMessage()
+	{
+		return $this->_errorMessage;
+	}
+}
+
+
+$error = new ErrorObject("404 : not found");
+
+$log_to_text = new LogToConsole($error);
+
+$log_to_text->write();
+
+
+$error_adapter = new LogToExcelAdapter("404 : not found");
+$log_to_excel = new LogToExcel($error_adapter);
+
+
+$log_to_excel->write();
+
+```
