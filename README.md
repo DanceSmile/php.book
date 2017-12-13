@@ -182,7 +182,7 @@ final class Checkout
 
 ```
 
-### static关键字 延迟绑定
+### 延迟绑定
 
 static 不但可以作为静态函数或静态属性的标识，还可以作为当前调用的类并且实例化
 
@@ -217,7 +217,72 @@ var_dump($phpDoc);
 var_dump($pythonDoc);
 
 ```
+### 拦截器
 
+```php
+/**
+ * 拦截器
+ */
+class People
+{
+    // 访问一个未定义的属性
+    public function __get($name)
+    {
+        // TODO: Implement __get() method.
+        echo $name . "\n" ;
+    }
+
+    // 设置一个未定义的属性
+    public  function __set($name, $value)
+    {
+        // TODO: Implement __set() method.
+        echo $name ."\n" , $value ."\n";
+    }
+    //  调用一个未定义的方法
+    public  function __call($name, $arguments)
+    {
+        // TODO: Implement __call() method.
+
+        var_dump($arguments);
+        echo $name;
+    }
+    // 对为定义的属性使用isset
+    public function __isset($name)
+    {
+        // TODO: Implement __isset() method.
+        echo $name . "\n";
+    }
+
+    // 对未定义的属性使用unset
+    public  function __unset($name)
+    {
+        // TODO: Implement __unset() method.
+        echo $name ."\n";
+    }
+
+    // 直接输出perospn 对象
+    public  function  __toString()
+    {
+        // TODO: Implement __toString() method.
+        return "Propele";
+    }
+
+}
+
+$person = new  People();
+
+$person->name = "zero"; //  name  \n zero
+
+$person->age;  // age
+
+$person -> run("zero","mile");  //array("zero","milk")  run
+
+isset($person->eye);  // eye
+
+unset($person->name); // name
+
+echo $person;
+```
 ## 反射
 
 PHP反射可以分析属性，函数和对象，它是由一系列内置的类组成
