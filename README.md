@@ -1,7 +1,8 @@
-## php  密码hash
+## 密码hash
 
 ```php
 $password = 'phpHashBcryptWithconst';
+
 $hash_password = password_hash($password,PASSWORD_DEFAULT,["cost"=>12]);
 
 echo $hash_password;
@@ -43,6 +44,7 @@ class Person
 // 可以通过类来访问属性和方法，称之为静态方法或者类方法
 // 静态方法不能访问普通属性，因为普通属性是绑定在对象上，但是可以访问静态属性
 $eye_count = Person::$eye_count;
+
 var_dump($eye_count);
 
 Person::go();
@@ -144,7 +146,6 @@ abstract class Product{
 
 }
 
-
 class MilkProduct extends Product implements Chargeable
 {
     public  function  getPrice()
@@ -153,7 +154,6 @@ class MilkProduct extends Product implements Chargeable
 
     }
 }
-
 
 $milk = new MilkProduct();
 
@@ -750,5 +750,94 @@ abstract class Model
 
 	}
 }
+
+```
+
+### 观察者模式
+
+```php
+/**
+ * 一个购买牛奶的例子；
+ * 购买的动作会造成库存的减少 同时 也会有账户金额的增加
+ * 所以购买的动作，可以用多个添加多个观察者 （库存观察者和账户观察者）
+ */
+class MilkProduct
+{
+    public $name;
+    public $price;
+    public $store;
+    public $buy = 0 ;
+    public $account = 0;
+
+    // 存储观察者
+    public  $_observer = array() ;
+    public   function  __construct($name,$store,$price)
+    {
+        $this->name = $name;
+        $this->store = $store;
+        $this->price = $price;
+    }
+    // 添加观察者
+    public  function  attachObserver($observer){
+        $this->_observer[] = $observer;
+    }
+    // 通知观察者
+    public function notify()
+    {
+
+        foreach ($this->_observer as $_obsever)
+        {
+            $_obsever->update($this);
+        }
+
+    }
+
+    public function  buy()
+    {
+
+        $this->notify($this);
+
+    }
+}
+
+
+
+class  BuyMilkStoreObserver
+{
+    public function  update(MilkProduct $product){
+        $product->store -= 1;
+    }
+}
+
+
+
+class  BuyMilkMoneyObserver
+{
+    public function  update(MilkProduct $product){
+        $product->account += $product->price;
+    }
+}
+
+$milk = new MilkProduct("zero",100,10);
+
+$storeObserver = new  BuyMilkStoreObserver();
+
+$moneyObserver = new BuyMilkMoneyObserver();
+
+$milk->attachObserver($storeObserver);
+$milk->attachObserver($moneyObserver);
+
+echo $milk -> store . "\n";    // 100
+echo $milk -> account . "\n";  // 0
+
+$milk -> buy ();
+
+echo $milk -> store . "\n";    // 99
+echo $milk -> account . "\n";  // 10
+
+$milk -> buy ();
+
+echo $milk -> store . "\n";    // 98
+echo $milk -> account . "\n";  // 20
 
 ```
