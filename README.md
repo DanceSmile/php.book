@@ -13,7 +13,7 @@ var_dump($verify);
 
 ## 对象基础
 
-### 类变量和类方法 || 静态变量和静态方法
+### 类变量和类方法
 
 ```PHP
 /**
@@ -56,7 +56,7 @@ $zero->greeting();
 var_dump($zero::$eye_count);
 
 ```
-### 常量
+### 类常量
 
 ```PHP
 
@@ -161,6 +161,61 @@ $milk = new MilkProduct();
 var_dump( $milk instanceof MilkProduct );
 var_dump( $milk instanceof Product );
 var_dump( $milk instanceof Chargeable );
+```
+
+### final类和方法
+
+```php
+/**
+ * final关键字可以终止类的继承
+ * final关键字可以终止类的方法被复写
+ */
+final class Checkout
+{
+    //  不能被覆盖
+    final public function  test()
+    {
+
+    }
+
+}
+
+```
+
+### static关键字 延迟绑定
+
+static 不但可以作为静态函数或静态属性的标识，还可以作为当前调用的类并且实例化
+
+static 实例化对象，当被对象调用的时候才会绑定当前对象的属性
+
+```php
+class Document
+{
+    public static  function create()
+    {
+        // 此时的static表示调用的对象
+        return new static();
+    }
+}
+
+class  PhpDocument extends  Document
+{
+        //pass
+}
+
+class  PythonDocument  extends  Document
+{
+        //pass
+}
+
+$phpDoc = PhpDocument::create();
+
+$pythonDoc = PythonDocument::create();
+
+var_dump($phpDoc);
+
+var_dump($pythonDoc);
+
 ```
 
 ## 反射
