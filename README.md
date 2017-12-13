@@ -1,4 +1,4 @@
-## 密码hash
+## 密码HASH
 
 ```php
 $password = 'phpHashBcryptWithconst';
@@ -657,7 +657,6 @@ $log_to_text = new LogToConsole($error);
 
 $log_to_text->write();
 
-
 $error_adapter = new LogToExcelAdapter("404 : not found");
 $log_to_excel = new LogToExcel($error_adapter);
 
@@ -800,16 +799,12 @@ class MilkProduct
     }
 }
 
-
-
 class  BuyMilkStoreObserver
 {
     public function  update(MilkProduct $product){
         $product->store -= 1;
     }
 }
-
-
 
 class  BuyMilkMoneyObserver
 {
