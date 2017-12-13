@@ -1,6 +1,6 @@
 ## php  密码hash
 
-```PHP
+```php
 $password = 'phpHashBcryptWithconst';
 $hash_password = password_hash($password,PASSWORD_DEFAULT,["cost"=>12]);
 
@@ -15,7 +15,7 @@ var_dump($verify);
 
 ### 类变量和类方法
 
-```PHP
+```php
 /**
  * 静态方法和属性
  * 静态变量和方法的好处在于不需要实例化就可以访问静态属性和方法，
@@ -58,7 +58,7 @@ var_dump($zero::$eye_count);
 ```
 ### 类常量
 
-```PHP
+```php
 
 /**
  *  常量属性
@@ -94,7 +94,7 @@ var_dump($product::PRICE);
 ```
 ### 抽象类
 
-```PHP
+```php
 
 /**
  * 抽象类使用abstract关键词定义
@@ -125,7 +125,7 @@ var_dump($application);
 
 ### 接口类
 
-```PHP
+```php
 
 /**
  * Interface Chargeable
@@ -226,7 +226,7 @@ PHP反射可以分析属性，函数和对象，它是由一系列内置的类�
 
 使用反射类可以获取一个类的更多细节
 
-```PHP
+```php
 //定义一个简单的类
 class Animal {
 
@@ -263,7 +263,7 @@ Reflection::export($reflection);
 >  使用 ReflectionClass 分析类
 
 
-```PHP
+```php
 //实例化一个反射类，反射类的构造函数接受一个类名作为它的唯一参数
 $reflection =  new ReflectionClass("Animal");
 
@@ -307,7 +307,7 @@ var_dump($is_able_instance);
 >  使用 ReflectionMethod 分析方法
 
 
-```PHP
+```php
 //获取分析类的所有方法，返回一个 ReflectionMethod类型的数组
 $fun_arr = $reflection->getMethods();
 var_dump($fun_arr);
@@ -362,7 +362,7 @@ var_dump($is_reference);
 
 >  使用 ReflectionParameter 检测方法参数
 
-```PHP
+```php
 
 //获取方法的所有参数对象
 $params = $fun_run->getParameters();
@@ -400,7 +400,7 @@ var_dump($is_reference);
 
 使用反射实例化类,并且执行实例里的方法
 
-```PHP
+```php
 class Person{
 
     function greeting()
@@ -436,7 +436,7 @@ $greeting->invoke($person);
 
 ### 单例模式
 
-```PHP
+```php
 /**
  * 构造一个配置类
  */
@@ -496,7 +496,7 @@ echo $prop2->getProperty("age");
 
 ### 适配器模式
 
-```PHP
+```php
 /**
  * 适配器模式
  * 适配器模式就是将某个对象(ErrorObject)的接口适配成另一个对象所期望的接口(LogToExcelAdapter)
@@ -603,7 +603,7 @@ $log_to_excel->write();
 
 ### 建造者模式
 
-```PHP
+```php
 /**
 * 建造者模式
 */
@@ -668,7 +668,7 @@ var_dump($product);
 ```
 ### 数据库访问模式
 
-```PHP
+```php
 /**
 * 数据访问对象模式
 */
