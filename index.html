@@ -7,25 +7,34 @@
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
-  <style media="screen">
-     .token.function, .token.constant {
-        color: #07a;
-      }
-      .token.variable {
-        color: #e90;
-      }
-      .token.deliminator {
-        font-weight:bold;
-      }
-   </style>
+  <style>
+        .app-nav a, .app-nav li {
+            font-size: 14px;
+        }
+        .markdown-section {
+            max-width: 900px;
+            padding: 60px 15px 40px;
+        }
+        .donate {
+            position: fixed;
+            right: 0;
+        }
+    </style>
 </head>
 <body>
+  <nav>
+    <a href="#/">首页</a>
+    <a href="//loveseem.com">博客</a>
+    <a href="#/zh-cn/">技术栈</a>
+    <a href="#/zh-cn/">计划</a>
+    <a href="#/zh-cn/">图书</a>
+  </nav>
   <div id="app"></div>
   <script>
     window.$docsify = {
       name: 'PHP开发者',
-      repo: 'https://github.com/DanceSmile/php.book',
-      auto2top: true
+      auto2top: true,
+      loadNavBar:true
     }
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>

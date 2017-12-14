@@ -283,6 +283,9 @@ unset($person->name); // name
 
 echo $person;
 ```
+
+
+
 ## 反射
 
 PHP反射可以分析属性，函数和对象，它是由一系列内置的类组成
@@ -835,4 +838,74 @@ $milk -> buy ();
 echo $milk -> store . "\n";    // 98
 echo $milk -> account . "\n";  // 20
 
+```
+
+### 外观模式
+
+> 在应用程序中 下一个步骤需要负载的逻辑步骤和方法调用的时候，可以创建一个外观对象
+
+```php
+/**
+ * 外观模式
+ * 外观模式隐藏了调用对象的复杂度
+ * 在应用程序中 下一个步骤需要负载的逻辑步骤和方法调用的时候，可以创建一个外观对象
+ */
+class Article
+{
+    public  function  __construct( $title, $descript, $content )
+    {
+        $this->title = $title;
+        $this->descript = $descript;
+        $this->content = $content;
+    }
+
+    public  function  save(){
+
+        return $this->title . PHP_EOL . $this->descript . PHP_EOL . $this->content;
+    }
+}
+
+class FormatTitle {
+
+    public  static function makeTitle(Article $article )
+    {
+        $article->title = strtoupper($article->title);
+    }
+}
+
+class FormatDescript
+{
+    public static  function makeDescript( Article $article)
+    {
+        $article->descript  = substr($article->descript,0,100);
+    }
+}
+
+class FormatContent
+{
+    public  static  function makeContent(Article $article)
+    {
+        $article->content = $article -> content ."\n ". "author by zero";
+    }
+}
+
+
+class ArticleFacade
+{
+    public  static function  create(Article $article){
+
+        FormatTitle::makeTitle($article);
+        FormatDescript::makeDescript($article);
+        FormatContent::makeContent($article);
+
+        return $article;
+
+    }
+}
+
+$article = new Article(" hello word ","php is best language!","blablaalball");
+
+$instance = ArticleFacade::create($article);
+
+var_dump($instance);
 ```
