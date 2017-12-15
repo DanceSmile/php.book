@@ -562,24 +562,94 @@ echo $prop2->getProperty("age");
 
 > 静态方法不可以访问对象属性，但是可以访问一个静态属性
 
+### 转化器模式
+
+> 转换器模式
+
+
+
 ### 适配器模式
+
+> 将一个类的接口转换成客户希望的另外一个接口,使用原本不兼容的而不能在一起工作的那些类可以在一起工作。
+
+```php
+/*驱动接口*/
+interface db_driver
+{
+    public  function connect();
+    public  function query();
+}
+
+/*mysql的数据库实现*/
+class db_mysql implements db_driver
+{
+
+    public function connect()
+    {
+        /*具体代码实现*/
+    }
+
+    public function query($sql)
+   {
+        /*具体代码实现*/
+    }
+}
+/*pdo的数据库实现*/
+class db_pdo implements db_driver
+{
+
+    public function connect()
+    {
+        /*具体代码实现*/
+    }
+
+    public function query($sql)
+    {
+        /*具体代码实现*/
+    }
+}
+/*定义适配器类*/
+class db_adapter
+{
+
+    private $db;
+
+    public function __construct($db_obj)
+    {
+        $this->db = $db_obj;
+    }
+
+    public function connect()
+    {
+        $this->db->connect();
+    }
+
+    public function query($sql)
+    {
+        $this->db->query($sql);
+    }
+}
+
+/*客户端应用*/
+$db = new db_adapter(new db_mysql());
+```
 
 ```php
 /**
  * 适配器模式
  * 适配器模式就是将某个对象(ErrorObject)的接口适配成另一个对象所期望的接口(LogToExcelAdapter)
  */
-/**
-* error class
-*/
 class  ErrorObject
 {
 	private $_error;
+
+  // 传入实例信息
 	public function __construct($error)
 	{
 		$this->_error = $error;
 	}
 
+  // 获取错误信息
 	public function getError()
 	{
 		return $this->_error;
@@ -587,13 +657,15 @@ class  ErrorObject
 }
 
 /**
-* log console
+* 输出错误类
 */
 class LogToConsole
 {
 
 	private $_errorObj;
-	function __construct(ErrorObject $error)
+
+  // 存入错误类的实例
+	public function __construct(ErrorObject $error)
 	{
 		$this->_errorObj  = $error;
 	}
@@ -607,7 +679,7 @@ class LogToConsole
 }
 
 /**
-*
+* 输出excel对象
 */
 class LogToExcel
 {
@@ -630,7 +702,7 @@ class LogToExcel
 }
 
 /**
-*
+*  适配excel的接口
 */
 class LogToExcelAdapter extends ErrorObject
 {
@@ -670,6 +742,8 @@ $log_to_excel->write();
 
 ### 建造者模式
 
+> 创建一个很复杂的对象可以使用创建者模式
+
 ```php
 /**
 * 建造者模式
@@ -707,7 +781,7 @@ class ProductBuilder
 	private $_product = NUll;
 	private  $_configs = array();
 
-	public 	function __construct($configs)
+	public function __construct($configs)
 	{
 		$this->_product = new Product();
 		$this->_configs = $configs;
@@ -719,7 +793,6 @@ class ProductBuilder
 		$this->_product->setSize($this->_configs["size"]);
 		$this->_product->setColor($this->_configs["color"]);
 	}
-
 
 	public function getProduct()
 	{
@@ -913,12 +986,10 @@ var_dump($instance);
 ### 工厂模式
 
 ```php
-
-class    RoadBike {
+class  RoadBike {
 
     public  function  run()
     {
-
         return " Road bike is running!!";
     }
 }
@@ -930,7 +1001,6 @@ class  MountainBike
         return "moutain bike is running!!";
     }
 }
-
 
 class  BikeFactory
 {
@@ -948,8 +1018,6 @@ class  BikeFactory
         }
     }
 }
-
-
 
 $roadbike = BikeFactory::build("Road");
 var_dump($roadbike);
@@ -1031,7 +1099,6 @@ class StudentDecorator
         foreach ($this->student->member as $key => &$value )
         {
             $value = strtoupper($value);
-
         }
     }
 
