@@ -909,3 +909,53 @@ $instance = ArticleFacade::create($article);
 
 var_dump($instance);
 ```
+
+### 工厂模式
+
+```php
+
+class    RoadBike {
+
+    public  function  run()
+    {
+
+        return " Road bike is running!!";
+    }
+}
+
+class  MountainBike
+{
+    public  function run()
+    {
+        return "moutain bike is running!!";
+    }
+}
+
+
+class  BikeFactory
+{
+    public  static  function  build($type){
+
+        switch ($type){
+            case "Mountain":
+                return new MountainBike();
+                break;
+            case "Road":
+                return new RoadBike();
+            default:
+                throw new  Exception("error type");
+            break;
+        }
+    }
+}
+
+
+
+$roadbike = BikeFactory::build("Road");
+var_dump($roadbike);
+
+$moutainbike = BikeFactory::build("Mountain");
+var_dump($moutainbike);
+
+$nonebike =BikeFactory::build("rand");
+```
