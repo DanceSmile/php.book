@@ -959,3 +959,90 @@ var_dump($moutainbike);
 
 $nonebike =BikeFactory::build("rand");
 ```
+### 装饰器模式
+
+- 在不修改对象结构的情况下，对原有的对象进行内容或者功能的修改，就应该使用装饰器模式
+- 当现有的需求要求不影响现有的基本代码的稳定的前提下，对程序的内容和功能进行很小的该动，最好使用装饰器模式
+
+```php
+/**
+*  创建一个班级学生类
+*  添加班级成员
+*  展示班级成员列表
+*/
+class  Student
+{
+    public  $member;
+
+    // 初始化班级成员
+    public  function  __construct()
+    {
+        $this->member = array();
+    }
+
+    // 添加成员
+    public function  addMember($stuent)
+    {
+        $this->member[] = $stuent;
+    }
+
+    // 展示成员
+    public function showMember()
+    {
+        $member = '';
+
+        foreach ($this->member as  $key => $value)
+        {
+            $member .=  $key . " : " .$value . PHP_EOL;
+        }
+        return $member;
+    }
+}
+
+// 成员数据
+$member = array( 'zero' , 'one' , "two" );
+
+// 实例化班级成员类
+$class = new Student();
+
+// 循环添加成员进对象
+foreach ($member as $value)
+{
+    $class->addMember($value);
+}
+
+// 展示成员
+echo ( $class->showMember() );
+
+
+/**
+* 班级成员装饰器
+* 对每个成员的名称大写开头
+*/
+class StudentDecorator
+{
+    public  $student;
+    public  function  __construct( Student $student )
+    {
+        $this-> student = $student;
+    }
+    public function uppercase()
+    {
+        foreach ($this->student->member as $key => &$value )
+        {
+            $value = strtoupper($value);
+
+        }
+    }
+
+}
+
+// 创建一个修饰器
+$decorator = new StudentDecorator($class);
+
+// 对成员的名称大写
+$decorator->uppercase();
+
+// 输出
+echo $class->showMember();
+```
